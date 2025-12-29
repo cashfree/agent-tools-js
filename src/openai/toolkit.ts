@@ -105,6 +105,16 @@ class CashfreeAgentToolkit {
   async handleToolCall(
     toolCall: ChatCompletionMessageToolCall,
   ): Promise<ChatCompletionToolMessageParam> {
+    if (toolCall.type !== "function") {
+      return {
+        role: "tool",
+        tool_call_id: toolCall.id,
+        content: JSON.stringify({
+          error: `Unsupported tool call type: ${toolCall.type}`,
+        }),
+      };
+    }
+
     const toolDef = this.toolDefinitions.find(
       (t) => t.method === toolCall.function.name,
     );
