@@ -17,9 +17,9 @@ npm install @cashfreepayments/agent-toolkit
 
 The toolkit supports multiple frameworks, exposed through sub-paths:
 
-- **AI SDK**: `@cashfreepayments/agent-toolkit/ai-sdk` - [Documentation](./src/ai-sdk/README.md)
-- **LangChain**: `@cashfreepayments/agent-toolkit/langchain` - [Documentation](./src/langchain/README.md)
-- **OpenAI**: `@cashfreepayments/agent-toolkit/openai` - [Documentation](./src/openai/README.md)
+- **AI SDK**: `@cashfreepayments/agent-toolkit/ai-sdk` - [Documentation](https://github.com/cashfree/agent-tools-js/blob/main/src/ai-sdk/README.md)
+- **LangChain**: `@cashfreepayments/agent-toolkit/langchain` - [Documentation](https://github.com/cashfree/agent-tools-js/blob/main/src/langchain/README.md)
+- **OpenAI**: `@cashfreepayments/agent-toolkit/openai` - [Documentation](https://github.com/cashfree/agent-tools-js/blob/main/src/openai/README.md)
 
 ## Usage
 
