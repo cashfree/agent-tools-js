@@ -82,4 +82,22 @@ const agent = new Agent({
 const result = await run(agent, 'Get details of order: order_12345678');
 ```
 
+
+## Available Tools
+
+- createOrder: Create a new order
+- getOrder: Retrieve details of an existing order
+- terminateOrder: Terminate/cancel an order
+- createRefund: Initiate a refund for an order
+- getAllRefunds: List all refunds for an order
+- getRefund: Retrieve details of a specific refund
+- orderPayUsingUpi: Pay for an order using UPI
+- orderPayUsingNetbanking: Pay for an order using Netbanking
+- orderPayUsingApp: Pay for an order using a payment app
+- orderPayUsingPlainCard: Pay for an order using a plain card
+- orderPayUsingSavedCard: Pay for an order using a saved card
+- createCustomer: Create a new customer in Cashfree
+- fetchCustomerInstruments: Fetch saved payment instruments for a customer
+
 See specific framework documentation for detailed examples.
+
