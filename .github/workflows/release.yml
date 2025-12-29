@@ -24,6 +24,9 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Install peer dependencies for build
+        run: npm install ai @ai-sdk/openai openai @openai/agents @langchain/core langchain --no-save
+
       - name: Build package
         run: npm run build
 
