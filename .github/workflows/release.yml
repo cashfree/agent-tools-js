@@ -18,6 +18,9 @@ jobs:
           node-version: 18
           registry-url: https://registry.npmjs.org/
 
+      - name: Set package version from release tag
+        run: npm version ${{ github.event.release.tag_name }} --no-git-tag-version --allow-same-version
+
       - name: Install dependencies
         run: npm install
 
