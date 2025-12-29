@@ -21,11 +21,10 @@ jobs:
       - name: Set package version from release tag
         run: npm version ${{ github.event.release.tag_name }} --no-git-tag-version --allow-same-version
 
-      - name: Install dependencies
-        run: npm install
-
-      - name: Install peer dependencies for build
-        run: npm install ai @ai-sdk/openai openai @openai/agents @langchain/core langchain --no-save
+      - name: Install dependencies and peer dependencies for build
+        run: |
+          npm install
+          npm install ai @ai-sdk/openai openai @openai/agents @langchain/core langchain
 
       - name: Build package
         run: npm run build
