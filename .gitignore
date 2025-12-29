@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+
+# Build outputs (each framework has its own folder)
+/openai/
+/ai-sdk/
+/langchain/
+
+# Compiled files in source (tsup handles building, these shouldn't exist)
+src/**/*.js
+src/**/*.d.ts
+src/**/*.d.ts.map
+src/**/*.js.map
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# TypeScript cache
+*.tsbuildinfo

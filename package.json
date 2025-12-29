@@ -1,0 +1,93 @@
+{
+  "name": "@cashfree/agent-toolkit",
+  "description": "Cashfree payments tools for AI agent frameworks",
+  "scripts": {
+    "build": "tsup",
+    "clean": "rm -rf openai ai-sdk langchain",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prettier": "prettier './**/*.{js,ts,md,html,css}' --write",
+    "prettier-check": "prettier './**/*.{js,ts,md,html,css}' --check"
+  },
+  "exports": {
+    "./openai": {
+      "types": "./openai/index.d.ts",
+      "require": "./openai/index.cjs",
+      "import": "./openai/index.js"
+    },
+    "./ai-sdk": {
+      "types": "./ai-sdk/index.d.ts",
+      "require": "./ai-sdk/index.cjs",
+      "import": "./ai-sdk/index.js"
+    },
+    "./langchain": {
+      "types": "./langchain/index.d.ts",
+      "require": "./langchain/index.cjs",
+      "import": "./langchain/index.js"
+    }
+  },
+  "files": [
+    "openai/**/*",
+    "ai-sdk/**/*",
+    "langchain/**/*",
+    "LICENSE",
+    "README.md",
+    "package.json"
+  ],
+  "keywords": [
+    "cashfree",
+    "openai",
+    "agents",
+    "payments",
+    "ai-sdk",
+    "langchain"
+  ],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "@langchain/core": "^1.1.8",
+    "@langchain/openai": "^1.2.0",
+    "@openai/agents": "^0.3.7",
+    "@types/node": "^22.10.5",
+    "langchain": "^1.2.3",
+    "prettier": "^3.7.4",
+    "tsup": "^8.3.5",
+    "typescript": "^5.9.3",
+    "zod": "^3.25.76"
+  },
+  "dependencies": {
+    "cashfree-pg": "^5.1.0",
+    "zod": "^3.25.76",
+    "zod-to-json-schema": "^3.24.6"
+  },
+  "peerDependencies": {
+    "@ai-sdk/openai": "^3.0.1",
+    "@langchain/core": "^1.0.0",
+    "@openai/agents": "^0.3.0",
+    "ai": "^6.0.3",
+    "openai": "^4.86.1 || ^5.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@ai-sdk/openai": {
+      "optional": true
+    },
+    "@langchain/core": {
+      "optional": true
+    },
+    "@openai/agents": {
+      "optional": true
+    },
+    "ai": {
+      "optional": true
+    },
+    "langchain": {
+      "optional": true
+    },
+    "openai": {
+      "optional": true
+    }
+  }
+}

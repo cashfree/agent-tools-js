@@ -1,0 +1,9 @@
+# Build outputs
+openai/
+ai-sdk/
+langchain/
+node_modules/
+
+# Package files
+package-lock.json
+
