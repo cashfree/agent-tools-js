@@ -1,6 +1,6 @@
 {
   "name": "@cashfreepayments/agent-toolkit",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "Cashfree payments tools for AI agent frameworks",
   "scripts": {
     "build": "tsup",
@@ -49,11 +49,14 @@
     "node": ">=18"
   },
   "devDependencies": {
+    "@ai-sdk/openai": "^3.0.1",
     "@langchain/core": "^1.1.8",
     "@langchain/openai": "^1.2.0",
     "@openai/agents": "^0.3.7",
     "@types/node": "^22.10.5",
+    "ai": "^6.0.3",
     "langchain": "^1.2.3",
+    "openai": "^5.0.0",
     "prettier": "^3.7.4",
     "tsup": "^8.3.5",
     "typescript": "^5.9.3",
