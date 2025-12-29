@@ -5,7 +5,7 @@ The Cashfree Payments Agent Toolkit enables usage with the official OpenAI Node.
 ## Installation
 
 ```bash
-npm install @cashfree/agent-toolkit
+npm install @cashfreepayments/agent-toolkit
 ```
 
 ## Requirements
@@ -19,7 +19,7 @@ npm install @cashfree/agent-toolkit
 import {
   CashfreeAgentToolkit,
   CFEnvironment,
-} from "@cashfree/agent-toolkit/openai";
+} from "@cashfreepayments/agent-toolkit/openai";
 
 const cashfreeToolkit = new CashfreeAgentToolkit(
   CFEnvironment.SANDBOX,

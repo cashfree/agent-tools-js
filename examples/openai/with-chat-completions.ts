@@ -9,7 +9,7 @@ import type { ChatCompletionMessageParam } from "openai/resources";
 import {
   CashfreeAgentToolkit,
   CFEnvironment,
-} from "@cashfree/agent-toolkit/openai";
+} from "@cashfreepayments/agent-toolkit/openai";
 
 const openai = new OpenAI();
 

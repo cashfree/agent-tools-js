@@ -1,5 +1,5 @@
 {
-  "name": "@cashfree/agent-toolkit",
+  "name": "@cashfreepayments/agent-toolkit",
   "description": "Cashfree payments tools for AI agent frameworks",
   "scripts": {
     "build": "tsup",

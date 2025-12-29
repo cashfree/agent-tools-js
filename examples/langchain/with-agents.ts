@@ -15,7 +15,7 @@ import { HumanMessage } from "@langchain/core/messages";
 import {
   CashfreeAgentToolkit,
   CFEnvironment,
-} from "@cashfree/agent-toolkit/langchain";
+} from "@cashfreepayments/agent-toolkit/langchain";
 
 // Initialize the Cashfree toolkit
 const cashfree = new CashfreeAgentToolkit(

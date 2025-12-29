@@ -8,7 +8,7 @@ import { Agent, run } from "@openai/agents";
 import {
   CashfreeAgentToolkit,
   CFEnvironment,
-} from "@cashfree/agent-toolkit/openai";
+} from "@cashfreepayments/agent-toolkit/openai";
 
 // Initialize the toolkit
 const cashfree = new CashfreeAgentToolkit(

@@ -5,7 +5,7 @@ The Cashfree Payments Agent Toolkit enables Vercel's AI SDK to integrate with Ca
 ## Installation
 
 ```bash
-npm install @cashfree/agent-toolkit
+npm install @cashfreepayments/agent-toolkit
 ```
 
 ## Requirements
@@ -19,7 +19,7 @@ npm install @cashfree/agent-toolkit
 import {
   CashfreeAISDKToolkit,
   CFEnvironment,
-} from "@cashfree/agent-toolkit/ai-sdk";
+} from "@cashfreepayments/agent-toolkit/ai-sdk";
 
 const cashfreeToolkit = new CashfreeAISDKToolkit(
   CFEnvironment.SANDBOX,

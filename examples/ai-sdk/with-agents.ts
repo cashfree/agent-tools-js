@@ -9,7 +9,7 @@ import { openai } from "@ai-sdk/openai";
 import {
   CashfreeAISDKToolkit,
   CFEnvironment,
-} from "@cashfree/agent-toolkit/ai-sdk";
+} from "@cashfreepayments/agent-toolkit/ai-sdk";
 import { z } from "zod";
 
 // Initialize the toolkit

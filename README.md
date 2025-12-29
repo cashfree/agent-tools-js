@@ -5,7 +5,7 @@ The Cashfree Payments Agent Toolkit enables popular agent frameworks including L
 ## Installation
 
 ```bash
-npm install @cashfree/agent-toolkit
+npm install @cashfreepayments/agent-toolkit
 ```
 
 ## Requirements
@@ -17,9 +17,9 @@ npm install @cashfree/agent-toolkit
 
 The toolkit supports multiple frameworks, exposed through sub-paths:
 
-- **AI SDK**: `@cashfree/agent-toolkit/ai-sdk` - [Documentation](./src/ai-sdk/README.md)
-- **LangChain**: `@cashfree/agent-toolkit/langchain` - [Documentation](./src/langchain/README.md)
-- **OpenAI**: `@cashfree/agent-toolkit/openai` - [Documentation](./src/openai/README.md)
+- **AI SDK**: `@cashfreepayments/agent-toolkit/ai-sdk` - [Documentation](./src/ai-sdk/README.md)
+- **LangChain**: `@cashfreepayments/agent-toolkit/langchain` - [Documentation](./src/langchain/README.md)
+- **OpenAI**: `@cashfreepayments/agent-toolkit/openai` - [Documentation](./src/openai/README.md)
 
 ## Usage
 
@@ -29,7 +29,7 @@ Each toolkit is initialized with your Cashfree credentials and environment confi
 import {
   CashfreeAgentToolkit,
   CFEnvironment,
-} from '@cashfree/agent-toolkit/openai'; // or langchain, ai-sdk
+} from '@cashfreepayments/agent-toolkit/openai'; // or langchain, ai-sdk
 
 // Configuration
 const environment = CFEnvironment.SANDBOX; // or PRODUCTION

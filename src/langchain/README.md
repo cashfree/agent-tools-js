@@ -5,7 +5,7 @@ The Cashfree Payments Agent Toolkit enables LangChain agents to integrate with C
 ## Installation
 
 ```bash
-npm install @cashfree/agent-toolkit
+npm install @cashfreepayments/agent-toolkit
 ```
 
 ## Requirements
@@ -19,7 +19,7 @@ npm install @cashfree/agent-toolkit
 import {
   CashfreeAgentToolkit,
   CFEnvironment,
-} from "@cashfree/agent-toolkit/langchain";
+} from "@cashfreepayments/agent-toolkit/langchain";
 
 const cashfreeToolkit = new CashfreeAgentToolkit(
   CFEnvironment.SANDBOX,
