@@ -74,7 +74,7 @@ const getOrderTool = cashfree.tools.getOrder;
 const agent = new Agent({
   name: 'Order Details Fetching Agent',
   instructions:
-    'You are a helpful assistant that getches and returns order details',
+    'You are a helpful assistant that fetches and returns order details',
   model: 'gpt-4o',
   tools: getOrderTool,
 });
