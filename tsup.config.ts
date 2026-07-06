@@ -1,4 +1,12 @@
 import {defineConfig, Options} from 'tsup';
+import {readFileSync} from 'node:fs';
+import {fileURLToPath} from 'node:url';
+import path from 'node:path';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const pkg = JSON.parse(
+  readFileSync(path.join(__dirname, 'package.json'), 'utf-8')
+);
 
 const commonConfig: Options = {
   outDir: '.',
@@ -8,6 +16,9 @@ const commonConfig: Options = {
   clean: false,
   splitting: false,
   treeshake: true,
+  define: {
+    __PACKAGE_VERSION__: JSON.stringify(pkg.version),
+  },
   external: [
     'openai',
     '@openai/agents',

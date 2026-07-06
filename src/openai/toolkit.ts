@@ -10,6 +10,7 @@ import tools, {
   type CashfreeToolMethod,
 } from "../tools/tools.js";
 import { tool, type Tool } from "@openai/agents";
+import { checkForUpdates } from "../version-check.js";
 
 class CashfreeAgentToolkit {
   private cashfree: Cashfree;
@@ -36,6 +37,8 @@ class CashfreeAgentToolkit {
     clientId: string,
     clientSecret: string,
   ) {
+    checkForUpdates();
+
     this.cashfree = new Cashfree(environment, clientId, clientSecret);
     this.toolDefinitions = tools;
 
