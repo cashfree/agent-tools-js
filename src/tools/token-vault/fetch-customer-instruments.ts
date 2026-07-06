@@ -1,6 +1,7 @@
 import {Cashfree} from 'cashfree-pg';
 import {z} from 'zod';
 import type {CashfreeToolDefinition} from '../tools.js';
+import {generateRequestId} from '../request-id.js';
 
 const fetchCustomerInstrumentsInputSchema = z.object({
   customer_id: z
@@ -26,7 +27,8 @@ const fetchCustomerInstruments = async (
   try {
     const response = await cashfree.PGCustomerFetchInstruments(
       customer_id,
-      instrument_type
+      instrument_type,
+      generateRequestId()
     );
     return response.data;
   } catch (error: any) {

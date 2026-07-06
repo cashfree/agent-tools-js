@@ -1,6 +1,7 @@
 import {Cashfree} from 'cashfree-pg';
 import {z} from 'zod';
 import type {CashfreeToolDefinition} from '../tools.js';
+import {generateRequestId} from '../request-id.js';
 
 const getAllRefundsInputSchema = z.object({
   order_id: z
@@ -14,7 +15,10 @@ const getAllRefunds = async (cashfree: Cashfree, args: GetAllRefundsInput) => {
   const {order_id} = args;
 
   try {
-    const response = await cashfree.PGOrderFetchRefunds(order_id);
+    const response = await cashfree.PGOrderFetchRefunds(
+      order_id,
+      generateRequestId()
+    );
     return response.data;
   } catch (error: any) {
     if (error.response?.data) {

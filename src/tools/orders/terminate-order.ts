@@ -1,6 +1,7 @@
 import {Cashfree} from 'cashfree-pg';
 import {z} from 'zod';
 import type {CashfreeToolDefinition} from '../tools.js';
+import {generateRequestId} from '../request-id.js';
 
 const terminateOrderInputSchema = z.object({
   order_id: z
@@ -25,7 +26,8 @@ const terminateOrder = async (
 
     const response = await cashfree.PGTerminateOrder(
       order_id,
-      TerminateOrderRequest
+      TerminateOrderRequest,
+      generateRequestId()
     );
     return response.data;
   } catch (error: any) {

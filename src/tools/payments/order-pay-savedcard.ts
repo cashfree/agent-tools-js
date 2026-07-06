@@ -1,6 +1,7 @@
 import {Cashfree} from 'cashfree-pg';
 import {z} from 'zod';
 import type {CashfreeToolDefinition} from '../tools.js';
+import {generateRequestId} from '../request-id.js';
 
 const orderPaySavedCardInputSchema = z.object({
   payment_session_id: z
@@ -37,7 +38,10 @@ const orderPaySavedCard = async (
       ...(offer_id ? {offer_id} : {}),
     };
 
-    const response = await cashfree.PGPayOrder(PayOrderRequest);
+    const response = await cashfree.PGPayOrder(
+      PayOrderRequest,
+      generateRequestId()
+    );
     return response.data;
   } catch (error: any) {
     if (error.response?.data) {
