@@ -5,6 +5,7 @@ import tools, {
   type CashfreeToolDefinition,
   type CashfreeToolMethod,
 } from "../tools/tools.js";
+import { checkForUpdates } from "../version-check.js";
 
 class CashfreeTool extends StructuredTool {
   private cashfree: Cashfree;
@@ -60,6 +61,8 @@ class CashfreeAgentToolkit implements BaseToolkit {
     clientId: string,
     clientSecret: string,
   ) {
+    checkForUpdates();
+
     this.cashfree = new Cashfree(environment, clientId, clientSecret);
     this.toolDefinitions = tools;
 

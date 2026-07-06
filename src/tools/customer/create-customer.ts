@@ -1,6 +1,7 @@
 import {Cashfree} from 'cashfree-pg';
 import {custom, z} from 'zod';
 import type {CashfreeToolDefinition} from '../tools.js';
+import {generateRequestId} from '../request-id.js';
 
 const createCustomerInputSchema = z.object({
   customer_phone: z
@@ -35,7 +36,10 @@ const createCustomer = async (
       customer_email,
       customer_name,
     };
-    const response = await cashfree.PGCreateCustomer(CreateCustomerRequest);
+    const response = await cashfree.PGCreateCustomer(
+      CreateCustomerRequest,
+      generateRequestId()
+    );
     return response.data;
   } catch (error: any) {
     if (error.response?.data) {

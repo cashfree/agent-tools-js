@@ -4,6 +4,7 @@ import tools, {
   type CashfreeToolDefinition,
   type CashfreeToolMethod,
 } from "../tools/tools.js";
+import { checkForUpdates } from "../version-check.js";
 
 class CashfreeAISDKToolkit {
   private cashfree: Cashfree;
@@ -29,6 +30,8 @@ class CashfreeAISDKToolkit {
     clientId: string,
     clientSecret: string,
   ) {
+    checkForUpdates();
+
     this.cashfree = new Cashfree(environment, clientId, clientSecret);
     this.toolDefinitions = tools;
 
