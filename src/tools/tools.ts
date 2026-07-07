@@ -13,6 +13,15 @@ import orderPayUsingPlainCardTool from './payments/order-pay-plaincard.js';
 import orderPayUsingSavedCardTool from './payments/order-pay-savedcard.js';
 import createCustomerTool from './customer/create-customer.js';
 import fetchCustomerInstrumentsTool from './token-vault/fetch-customer-instruments.js';
+import verifyPanTool from './verification/verify-pan.js';
+import verifyGstinTool from './verification/verify-gstin.js';
+import nameMatchTool from './verification/name-match.js';
+import aadhaarGenerateOtpTool from './verification/aadhaar-generate-otp.js';
+import aadhaarVerifyOtpTool from './verification/aadhaar-verify-otp.js';
+import createReversePennyDropTool from './verification/create-reverse-penny-drop.js';
+import getReversePennyDropStatusTool from './verification/get-reverse-penny-drop-status.js';
+import verifyBankAccountTool from './verification/verify-bank-account.js';
+import verifyIfscTool from './verification/verify-ifsc.js';
 
 export type CashfreeToolMethod =
   | 'createOrder'
@@ -27,7 +36,28 @@ export type CashfreeToolMethod =
   | 'orderPayUsingPlainCard'
   | 'orderPayUsingSavedCard'
   | 'createCustomer'
-  | 'fetchCustomerInstruments';
+  | 'fetchCustomerInstruments'
+  | 'verifyPan'
+  | 'verifyGstin'
+  | 'verifyNameMatch'
+  | 'aadhaarGenerateOtp'
+  | 'aadhaarVerifyOtp'
+  | 'createReversePennyDrop'
+  | 'getReversePennyDropStatus'
+  | 'verifyBankAccount'
+  | 'verifyIfsc';
+
+export type CashfreeToolkitOptions = {
+  /**
+   * Credentials for Verification Suite (SecureID) tools. These are separate
+   * from PG credentials and are generated from the Verification Suite
+   * dashboard. If omitted, the PG client ID/secret are reused.
+   */
+  verification?: {
+    clientId: string;
+    clientSecret: string;
+  };
+};
 
 export type CashfreeToolDefinition = {
   method: string;
@@ -51,6 +81,15 @@ const tools: CashfreeToolDefinition[] = [
   orderPayUsingSavedCardTool,
   createCustomerTool,
   fetchCustomerInstrumentsTool,
+  verifyPanTool,
+  verifyGstinTool,
+  nameMatchTool,
+  aadhaarGenerateOtpTool,
+  aadhaarVerifyOtpTool,
+  createReversePennyDropTool,
+  getReversePennyDropStatusTool,
+  verifyBankAccountTool,
+  verifyIfscTool,
 ];
 
 export default tools;

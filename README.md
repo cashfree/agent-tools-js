@@ -40,6 +40,19 @@ const clientSecret = process.env.CASHFREE_CLIENT_SECRET;
 const cashfree = new CashfreeAgentToolkit(environment, clientId, clientSecret);
 ```
 
+Cashfree issues **separate API keys** for Payment Gateway and for the Verification Suite (SecureID). The PG keys go in the second and third arguments and are used by the order/refund/payment tools. If you plan to use the verification tools, explicitly pass your SecureID keys as the fourth argument:
+
+```typescript
+const cashfree = new CashfreeAgentToolkit(environment, clientId, clientSecret, {
+  verification: {
+    clientId: process.env.CASHFREE_VERIFICATION_CLIENT_ID, // SecureID keys — used by verification tools
+    clientSecret: process.env.CASHFREE_VERIFICATION_CLIENT_SECRET,
+  },
+});
+```
+
+If the `verification` option is omitted, the PG keys are reused for verification tools — those calls will fail with authentication errors unless your account uses the same keys for both products.
+
 ## Tools
 
 The toolkit works with OpenAI Agents SDK, LangChain and Vercel's AI SDK and can be passed as a list of tools. For example:
@@ -82,8 +95,9 @@ const agent = new Agent({
 const result = await run(agent, 'Get details of order: order_12345678');
 ```
 
-
 ## Available Tools
+
+### Payment Gateway (PG)
 
 - createOrder: Create a new order
 - getOrder: Retrieve details of an existing order
@@ -99,5 +113,16 @@ const result = await run(agent, 'Get details of order: order_12345678');
 - createCustomer: Create a new customer in Cashfree
 - fetchCustomerInstruments: Fetch saved payment instruments for a customer
 
-See specific framework documentation for detailed examples.
+### Verification Suite (SecureID)
 
+- verifyPan: Verify a PAN and fetch the registered name
+- verifyGstin: Verify a GSTIN and fetch business details
+- verifyNameMatch: Fuzzy-match two names (e.g., user-provided vs registered)
+- verifyBankAccount: Verify a bank account with penny drop (account number + IFSC)
+- verifyIfsc: Verify an IFSC code and fetch branch details
+- aadhaarGenerateOtp: Send an OTP to the Aadhaar-linked mobile number
+- aadhaarVerifyOtp: Submit the OTP to complete Aadhaar verification
+- createReversePennyDrop: Create a reverse penny drop bank verification request (UPI link)
+- getReversePennyDropStatus: Fetch the result of a reverse penny drop request
+
+See specific framework documentation for detailed examples.

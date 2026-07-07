@@ -8,9 +8,11 @@ import { zodToJsonSchema } from "zod-to-json-schema";
 import tools, {
   type CashfreeToolDefinition,
   type CashfreeToolMethod,
+  type CashfreeToolkitOptions,
 } from "../tools/tools.js";
 import { tool, type Tool } from "@openai/agents";
 import { checkForUpdates } from "../version-check.js";
+import { configureVerificationClient } from "../tools/verification/client.js";
 
 class CashfreeAgentToolkit {
   private cashfree: Cashfree;
@@ -36,10 +38,16 @@ class CashfreeAgentToolkit {
     environment: CFEnvironment,
     clientId: string,
     clientSecret: string,
+    options?: CashfreeToolkitOptions,
   ) {
     checkForUpdates();
 
     this.cashfree = new Cashfree(environment, clientId, clientSecret);
+    configureVerificationClient(
+      environment,
+      options?.verification?.clientId ?? clientId,
+      options?.verification?.clientSecret ?? clientSecret,
+    );
     this.toolDefinitions = tools;
 
     // Build ChatCompletionTool array for getTools() for chat completions API
