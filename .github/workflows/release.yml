@@ -23,7 +23,9 @@ jobs:
           registry-url: https://registry.npmjs.org/
 
       - name: Update npm for Trusted Publishing
-        run: npm install -g npm@latest
+        run: |
+          npm install -g npm@11
+          npm --version
 
       - name: Set package version from release tag
         run: npm version ${{ github.event.release.tag_name }} --no-git-tag-version --allow-same-version
