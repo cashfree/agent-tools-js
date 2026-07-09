@@ -2,6 +2,10 @@
   "name": "@cashfreepayments/agent-toolkit",
   "version": "1.0.4",
   "description": "Cashfree payments tools for AI agent frameworks",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cashfree/agent-tools-js.git"
+  },
   "scripts": {
     "build": "tsup",
     "clean": "rm -rf openai ai-sdk langchain",
