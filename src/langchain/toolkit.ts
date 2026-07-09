@@ -4,8 +4,10 @@ import { z } from "zod";
 import tools, {
   type CashfreeToolDefinition,
   type CashfreeToolMethod,
+  type CashfreeToolkitOptions,
 } from "../tools/tools.js";
 import { checkForUpdates } from "../version-check.js";
+import { configureVerificationClient } from "../tools/verification/client.js";
 
 class CashfreeTool extends StructuredTool {
   private cashfree: Cashfree;
@@ -60,10 +62,16 @@ class CashfreeAgentToolkit implements BaseToolkit {
     environment: CFEnvironment,
     clientId: string,
     clientSecret: string,
+    options?: CashfreeToolkitOptions,
   ) {
     checkForUpdates();
 
     this.cashfree = new Cashfree(environment, clientId, clientSecret);
+    configureVerificationClient(
+      environment,
+      options?.verification?.clientId ?? clientId,
+      options?.verification?.clientSecret ?? clientSecret,
+    );
     this.toolDefinitions = tools;
 
     // Create LangChain tools array for getTools()

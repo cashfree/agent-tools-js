@@ -1,7 +1,7 @@
 import {Cashfree} from 'cashfree-pg';
 import {z} from 'zod';
 import type {CashfreeToolDefinition} from '../tools.js';
-import {generateRequestId} from '../request-id.js';
+import {generateRequestId, agentToolkitOptions} from '../request-id.js';
 
 const upiAuthorizeDetailsSchema = z.object({
   approve_by: z
@@ -99,7 +99,7 @@ const orderPayUpi = async (cashfree: Cashfree, args: OrderPayUpiInput) => {
 
     const response = await cashfree.PGPayOrder(
       PayOrderRequest,
-      generateRequestId()
+      generateRequestId(), undefined, agentToolkitOptions()
     );
     return response.data;
   } catch (error: any) {

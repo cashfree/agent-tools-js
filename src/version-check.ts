@@ -6,8 +6,8 @@ const NPM_REGISTRY_URL =
 let checked = false;
 
 function compareVersions(a: string, b: string): number {
-  const pa = a.split('.').map(n => parseInt(n, 10));
-  const pb = b.split('.').map(n => parseInt(n, 10));
+  const pa = a.split('.').map((n) => parseInt(n, 10));
+  const pb = b.split('.').map((n) => parseInt(n, 10));
   const len = Math.max(pa.length, pb.length);
   for (let i = 0; i < len; i++) {
     const x = pa[i] ?? 0;
@@ -42,7 +42,7 @@ export function checkForUpdates(): void {
   checked = true;
 
   fetchLatestPublishedVersion()
-    .then(latest => {
+    .then((latest) => {
       if (!latest || compareVersions(latest, __PACKAGE_VERSION__) <= 0) return;
       console.warn(
         `\n[@cashfreepayments/agent-toolkit] A newer version is available ` +

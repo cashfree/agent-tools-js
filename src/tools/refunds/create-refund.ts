@@ -1,7 +1,7 @@
 import {Cashfree} from 'cashfree-pg';
 import {z} from 'zod';
 import type {CashfreeToolDefinition} from '../tools.js';
-import {generateRequestId} from '../request-id.js';
+import {generateRequestId, agentToolkitOptions} from '../request-id.js';
 
 const refundSplitSchema = z.object({
   vendor_id: z.string().describe('Vendor ID for split.'),
@@ -58,7 +58,7 @@ const createRefund = async (cashfree: Cashfree, args: CreateRefundInput) => {
     const response = await cashfree.PGOrderCreateRefund(
       order_id,
       OrderCreateRefundRequest,
-      generateRequestId()
+      generateRequestId(), undefined, agentToolkitOptions()
     );
     return response.data;
   } catch (error: any) {
