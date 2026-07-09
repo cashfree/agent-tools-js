@@ -1,7 +1,7 @@
 import {Cashfree} from 'cashfree-pg';
 import {z} from 'zod';
 import type {CashfreeToolDefinition} from '../tools.js';
-import {generateRequestId} from '../request-id.js';
+import {generateRequestId, agentToolkitOptions} from '../request-id.js';
 import {NetbankingBankMap} from '../utils.js';
 
 const orderPayNetbankingInputSchema = z.object({
@@ -42,7 +42,7 @@ const orderPayNetbanking = async (
 
     const response = await cashfree.PGPayOrder(
       PayOrderRequest,
-      generateRequestId()
+      generateRequestId(), undefined, agentToolkitOptions()
     );
     return response.data;
   } catch (error: any) {

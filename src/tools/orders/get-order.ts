@@ -1,7 +1,7 @@
 import {Cashfree} from 'cashfree-pg';
 import {z} from 'zod';
 import type {CashfreeToolDefinition} from '../tools.js';
-import {generateRequestId} from '../request-id.js';
+import {generateRequestId, agentToolkitOptions} from '../request-id.js';
 
 const getOrderInputSchema = z.object({
   order_id: z
@@ -17,7 +17,7 @@ const getOrder = async (cashfree: Cashfree, args: getOrderInput) => {
   const {order_id} = args;
 
   try {
-    const response = await cashfree.PGFetchOrder(order_id, generateRequestId());
+    const response = await cashfree.PGFetchOrder(order_id, generateRequestId(), undefined, agentToolkitOptions());
     return response.data;
   } catch (error: any) {
     if (error.response?.data) {

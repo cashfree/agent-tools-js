@@ -4,19 +4,12 @@ import {
 } from 'cashfree-verification';
 import {CFEnvironment} from 'cashfree-pg';
 import {randomUUID} from 'crypto';
-import {generateRequestId} from '../request-id.js';
+import {generateRequestId, AGENT_TOOLKIT_PLATFORM} from '../request-id.js';
 
-// Axios request options type as seen by the verification SDK's bundled axios,
-// to avoid type conflicts with the hoisted root axios installation.
 type VerificationRequestOptions = NonNullable<
   Parameters<typeof CashfreeVerification.VrsGstinVerification>[1]
 >;
 
-/**
- * Configures the static cashfree-verification SDK client used by all
- * Verification Suite (SecureID) tools. VRS credentials are separate from
- * PG credentials and are generated from the Verification Suite dashboard.
- */
 export function configureVerificationClient(
   environment: CFEnvironment,
   clientId: string,
@@ -30,6 +23,8 @@ export function configureVerificationClient(
   CashfreeVerification.XClientSecret = clientSecret;
 }
 
+export const VERIFICATION_API_VERSION = '2024-12-01';
+
 export function getVerificationBaseUrl(): string {
   return CashfreeVerification.XEnvironment ===
     CFVerificationEnvironment.PRODUCTION
@@ -37,38 +32,96 @@ export function getVerificationBaseUrl(): string {
     : 'https://sandbox.cashfree.com/verification';
 }
 
-/**
- * verification_id must be <= 50 chars, only alphanumeric, dot, hyphen, underscore.
- */
 export function generateVerificationId(): string {
   return `at-${randomUUID()}`;
 }
 
-/**
- * Request options that tag SDK calls with an x-request-id header, mirroring
- * the request ID passed to every PG tool call.
- */
 export function withRequestId(): VerificationRequestOptions {
-  return {headers: {'x-request-id': generateRequestId()}};
+  return {
+    headers: {
+      'x-request-id': generateRequestId(),
+      'x-sdk-platform': AGENT_TOOLKIT_PLATFORM,
+    },
+  };
 }
 
-/**
- * Raw REST call for Verification Suite APIs not covered by the
- * cashfree-verification SDK (e.g. bank account sync, IFSC).
- */
+export async function verificationRequest(
+  method: 'GET' | 'POST' | 'DELETE',
+  path: string,
+  options?: {
+    body?: Record<string, any>;
+    query?: Record<string, any>;
+    extraHeaders?: Record<string, string>;
+  }
+): Promise<any> {
+  const {body, query, extraHeaders} = options ?? {};
+
+  let url = `${getVerificationBaseUrl()}${path}`;
+  if (query) {
+    const params = new URLSearchParams();
+    for (const [key, value] of Object.entries(query)) {
+      if (value !== undefined && value !== null && value !== '') {
+        params.append(key, String(value));
+      }
+    }
+    const qs = params.toString();
+    if (qs) url += `?${qs}`;
+  }
+
+  const headers: Record<string, string> = {
+    'x-client-id': CashfreeVerification.XClientId ?? '',
+    'x-client-secret': CashfreeVerification.XClientSecret ?? '',
+    'x-request-id': generateRequestId(),
+    'x-sdk-platform': AGENT_TOOLKIT_PLATFORM,
+    ...extraHeaders,
+  };
+  if (body !== undefined) {
+    headers['Content-Type'] = 'application/json';
+  }
+
+  const response = await fetch(url, {
+    method,
+    headers,
+    ...(body !== undefined && {body: JSON.stringify(body)}),
+  });
+
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    const error: any = new Error(
+      `Verification API request failed with status ${response.status}`
+    );
+    error.response = {status: response.status, data};
+    throw error;
+  }
+  return data;
+}
+
 export async function verificationPost(
   path: string,
-  body: Record<string, any>
+  body: Record<string, any>,
+  extraHeaders?: Record<string, string>
+): Promise<any> {
+  return verificationRequest('POST', path, {
+    body,
+    ...(extraHeaders && {extraHeaders}),
+  });
+}
+
+export async function verificationPostForm(
+  path: string,
+  form: FormData,
+  extraHeaders?: Record<string, string>
 ): Promise<any> {
   const response = await fetch(`${getVerificationBaseUrl()}${path}`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json',
       'x-client-id': CashfreeVerification.XClientId ?? '',
       'x-client-secret': CashfreeVerification.XClientSecret ?? '',
       'x-request-id': generateRequestId(),
+      'x-sdk-platform': AGENT_TOOLKIT_PLATFORM,
+      ...extraHeaders,
     },
-    body: JSON.stringify(body),
+    body: form,
   });
 
   const data = await response.json().catch(() => ({}));

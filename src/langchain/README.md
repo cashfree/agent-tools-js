@@ -30,7 +30,7 @@ const cashfreeToolkit = new CashfreeAgentToolkit(
 
 ### PG vs Verification Suite (SecureID) credentials
 
-Cashfree issues **separate API keys** for Payment Gateway and for the Verification Suite (SecureID). The PG keys go in the second and third constructor arguments; if you plan to use the verification tools (`verifyPan`, `verifyBankAccount`, `verifyGstin`, etc.), explicitly pass your SecureID keys in the `verification` option:
+Cashfree issues **separate API keys** for Payment Gateway and for the Verification Suite (SecureID). The PG keys go in the second and third constructor arguments; if you plan to use the verification tools (`verifyPan360`, `verifyBankAccount`, `verifyGstin`, etc.), explicitly pass your SecureID keys in the `verification` option:
 
 ```typescript
 const cashfreeToolkit = new CashfreeAgentToolkit(
@@ -75,7 +75,7 @@ const agent = createAgent({ model, tools });
 import { createAgent } from "langchain";
 
 const kycTools = [
-  cashfreeToolkit.toolsMap.verifyPan,
+  cashfreeToolkit.toolsMap.verifyPan360,
   cashfreeToolkit.toolsMap.verifyBankAccount,
   cashfreeToolkit.toolsMap.verifyIfsc,
   cashfreeToolkit.toolsMap.verifyNameMatch,
